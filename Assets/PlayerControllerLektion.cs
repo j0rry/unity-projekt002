@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerLektion : MonoBehaviour
 {
     Animator animator;
     bool walking = false;
