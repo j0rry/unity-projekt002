@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] int damage = 1;
+    
+    void OnFire(InputValue value)
     {
-        
+        if (value.isPressed)
+        {
+            Shoot();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Shoot() {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
+        {
+            if(hit.collider.GetComponent<Target>()){
+                hit.collider.GetComponent<Target>().health -= damage;
+            }
+        }
     }
 }
