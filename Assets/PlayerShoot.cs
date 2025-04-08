@@ -19,8 +19,19 @@ public class PlayerShoot : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            if(hit.collider.GetComponent<Target>()){
-                hit.collider.GetComponent<Target>().health -= damage;
+            EnemyTarget enemy = hit.collider.GetComponentInParent<EnemyTarget>();
+            if (enemy != null)
+            {
+                string hitArea = hit.collider.tag;
+                enemy.TakeDamage(hitArea, damage);
+            }
+
+            
+            Target target = hit.collider.GetComponent<Target>();
+            if (target != null)
+            {
+                target.health -= damage;
+                Debug.Log("Target hit! Remaining health: " + target.health);
             }
         }
     }
