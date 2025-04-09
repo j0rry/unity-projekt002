@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5978378265245884578}
   - component: {fileID: 7401138052973328450}
   - component: {fileID: 5493562605453723520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 2502530101819517346}
   - component: {fileID: 702351327794305080}
   - component: {fileID: 5500213210211348308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2853756405732843516}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: obj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,9 +255,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1008382322413252125}
   - component: {fileID: 3635726805784115980}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,3 +290,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46d0b3247d6e6b4a9b1e77bd7839339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headHealth: 100
+  bodyHealth: 100

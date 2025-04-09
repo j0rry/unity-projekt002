@@ -9,6 +9,9 @@ public class EnemyTarget : MonoBehaviour
     [SerializeField] int bodyHealth = 100;
     public int TotalHealth => headHealth + bodyHealth;
 
+    Transform[] waypoints;
+    int currentWaypointIndex = 0;
+
     void Start()
     {
        
@@ -40,6 +43,11 @@ public class EnemyTarget : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+
+
+    public void SetWaypoints(Transform[] waypoints){
+        this.waypoints = waypoints;
     }
 
 
