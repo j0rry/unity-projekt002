@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 public class TargetSpawner : MonoBehaviour
 {
 
-    [SerializeField] GameObject spherePrefab;  
+    [SerializeField] GameObject TargetPrefab; 
     [SerializeField] Transform spawnBox;      
     [SerializeField] int numberOfSpawns = 5; 
-    [SerializeField] Vector3 spawnBoxSize;
-    [SerializeField] float targetScale = 1;
+    [SerializeField] Vector3 targetScale;
+
+    Vector3 spawnBoxSize;
 
     void Start()
     {
@@ -18,19 +19,19 @@ public class TargetSpawner : MonoBehaviour
 
         for (int i = 0; i < numberOfSpawns; i++)
         {
-            SpawnRandomSphere(targetScale);
+            SpawnRandomSphere();
         }
     }
 
     void Update()
     {
         if(GameModeManager.Instance.numberOfCurrentSpawns < numberOfSpawns) {
-            SpawnRandomSphere(targetScale);
+            SpawnRandomSphere();
             GameModeManager.Instance.numberOfCurrentSpawns++;
         }
     }
 
-    public void SpawnRandomSphere(float scale)
+    public void SpawnRandomSphere()
     {
         Vector3 randomPosition = new Vector3(
             Random.Range(-spawnBoxSize.x / 2, spawnBoxSize.x / 2),
@@ -42,7 +43,7 @@ public class TargetSpawner : MonoBehaviour
         randomPosition += spawnBox.position;
 
         
-        GameObject target = Instantiate(spherePrefab, randomPosition, Quaternion.identity);
-        target.transform.localScale = new Vector3(scale, scale, scale);
+        GameObject target = Instantiate(TargetPrefab, randomPosition, Quaternion.identity);
+        target.transform.localScale = targetScale;
     }
 }

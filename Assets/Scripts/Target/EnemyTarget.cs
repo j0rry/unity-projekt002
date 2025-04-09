@@ -5,22 +5,21 @@ using UnityEngine;
 public class EnemyTarget : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] int headHealth = 100;
-    [SerializeField] int bodyHealth = 100;
+    public int headHealth = 100;
+    public int bodyHealth = 100;
     public int TotalHealth => headHealth + bodyHealth;
-
+    
+    [Header("Fun")]
     public float moveSpeed = 3f;
+    public bool godMode = false;
 
-    Transform[] waypoints;
+    [SerializeField] Transform[] waypoints;
     int currentWaypointIndex = 0;
-
-    void Start()
-    {
-       
-    }
 
     public void TakeDamage(string hitArea, int damage)
     {
+        if(godMode) return;
+
         if (hitArea == "Head")
         {
             headHealth -= damage * 100;
@@ -40,6 +39,8 @@ public class EnemyTarget : MonoBehaviour
         }
 
         if(headHealth <= 0 || bodyHealth <= 0) Die();
+
+        MoveEnemy();
 
     }
 
@@ -69,8 +70,5 @@ public class EnemyTarget : MonoBehaviour
     public void SetWaypoints(Transform[] waypoints){
         this.waypoints = waypoints;
     }
-
-
-
 
 }

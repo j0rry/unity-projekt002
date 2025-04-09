@@ -4,29 +4,47 @@ using UnityEngine;
 
 public class Tracking : MonoBehaviour
 {
-    int targets = 1;
+    [SerializeField] int targets = 1;
+    [SerializeField] float speed = 5;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform[] waypoints;
 
-    void Start()
+    void OnEnable()
     {
         GameModeManager.Instance.numberOfCurrentSpawns = targets;
         
         if (waypoints.Length > 0)
         {
-            GameObject enemy = Instantiate(enemyPrefab, waypoints[0].position, Quaternion.identity);
-
-            EnemyTarget enemyTarget = enemy.GetComponent<EnemyTarget>();
-            if (enemyTarget != null)
+            for (int i = 0; i < targets; i++)
             {
-                enemyTarget.SetWaypoints(waypoints);
+                GameObject enemy = SpawnEnemy();
+
+                EnemyTarget enemyTarget = enemy.GetComponent<EnemyTarget>();
+                if (enemyTarget != null)
+                {
+                    enemyTarget.SetWaypoints(waypoints);
+                }
             }
         }
     }
 
     void Update()
     {
-        
+        if(waypoints.Length > 0 && GameModeManager.Instance.numberOfCurrentSpawns < targets){
+            for (int i = 0; i < targets; i++)
+            {
+                SpawnEnemy();
+                GameModeManager.Instance.numberOfCurrentSpawns++;
+            }
+        }
+    }
+
+    GameObject SpawnEnemy()
+    {
+        GameObject enemy = Instantiate(enemyPrefab, waypoints[Random.Range(0, waypoints.Length)].position, Quaternion.identity);
+        enemy.GetComponent<EnemyTarget>().godMode = true;
+        enemy.GetComponent<EnemyTarget>().moveSpeed = speed;
+        return enemy;
     }
 
 }

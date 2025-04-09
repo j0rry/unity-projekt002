@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5493562605453723520}
   m_Layer: 6
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5500213210211348308}
   m_Layer: 6
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,3 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headHealth: 100
   bodyHealth: 100
+  moveSpeed: 2.6
+  godMode: 0
+  waypoints: []
