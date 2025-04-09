@@ -40,6 +40,11 @@ public class GameModeManager : MonoBehaviour
         {
             CycleGamemode();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void CycleGamemode()

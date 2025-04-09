@@ -31,7 +31,6 @@ public class PlayerShoot : MonoBehaviour
             if (target != null)
             {
                 target.health -= damage;
-                Debug.Log("Target hit! Remaining health: " + target.health);
             }
         }
     }

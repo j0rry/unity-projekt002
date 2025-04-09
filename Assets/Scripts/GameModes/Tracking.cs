@@ -18,13 +18,16 @@ public class Tracking : MonoBehaviour
             for (int i = 0; i < targets; i++)
             {
                 GameObject enemy = SpawnEnemy();
-
-                EnemyTarget enemyTarget = enemy.GetComponent<EnemyTarget>();
-                if (enemyTarget != null)
-                {
-                    enemyTarget.SetWaypoints(waypoints);
-                }
+                SetWaypoints(enemy);
             }
+        }
+    }
+
+    void SetWaypoints(GameObject enemy){
+        EnemyTarget enemyTarget = enemy.GetComponent<EnemyTarget>();
+        if (enemyTarget != null)
+        {
+            enemyTarget.SetWaypoints(waypoints);
         }
     }
 
@@ -33,7 +36,8 @@ public class Tracking : MonoBehaviour
         if(waypoints.Length > 0 && GameModeManager.Instance.numberOfCurrentSpawns < targets){
             for (int i = 0; i < targets; i++)
             {
-                SpawnEnemy();
+                GameObject enemy = SpawnEnemy();
+                SetWaypoints(enemy);
                 GameModeManager.Instance.numberOfCurrentSpawns++;
             }
         }
@@ -42,7 +46,7 @@ public class Tracking : MonoBehaviour
     GameObject SpawnEnemy()
     {
         GameObject enemy = Instantiate(enemyPrefab, waypoints[Random.Range(0, waypoints.Length)].position, Quaternion.identity);
-        enemy.GetComponent<EnemyTarget>().godMode = true;
+        enemy.GetComponent<EnemyTarget>().godMode = false;
         enemy.GetComponent<EnemyTarget>().moveSpeed = speed;
         return enemy;
     }
