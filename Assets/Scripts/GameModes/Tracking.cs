@@ -8,6 +8,8 @@ public class Tracking : MonoBehaviour
     [SerializeField] float speed = 5;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform[] waypoints;
+    [SerializeField] bool isMovingTarget = false;
+    [SerializeField] bool targetGodMode = false;
 
     void OnEnable()
     {
@@ -18,6 +20,7 @@ public class Tracking : MonoBehaviour
             for (int i = 0; i < targets; i++)
             {
                 GameObject enemy = SpawnEnemy();
+
                 SetWaypoints(enemy);
             }
         }
@@ -25,7 +28,7 @@ public class Tracking : MonoBehaviour
 
     void SetWaypoints(GameObject enemy){
         EnemyTarget enemyTarget = enemy.GetComponent<EnemyTarget>();
-        if (enemyTarget != null)
+        if (enemyTarget != null && isMovingTarget)
         {
             enemyTarget.SetWaypoints(waypoints);
         }
@@ -46,7 +49,7 @@ public class Tracking : MonoBehaviour
     GameObject SpawnEnemy()
     {
         GameObject enemy = Instantiate(enemyPrefab, waypoints[Random.Range(0, waypoints.Length)].position, Quaternion.identity);
-        enemy.GetComponent<EnemyTarget>().godMode = false;
+        enemy.GetComponent<EnemyTarget>().godMode = targetGodMode;
         enemy.GetComponent<EnemyTarget>().moveSpeed = speed;
         return enemy;
     }
