@@ -6,9 +6,9 @@ using UnityEngine;
 public class EnemyTarget : MonoBehaviour
 {
     [Header("Health")]
-    public int headHealth = 1;
-    public int bodyHealth = 4;
-    public int TotalHealth => headHealth + bodyHealth;
+    [SerializeField] int headHealth = 1;
+    [SerializeField] int bodyHealth = 4;
+    [SerializeField] int TotalHealth => headHealth + bodyHealth;
 
     
     [Header("Fun")]
@@ -87,7 +87,6 @@ public class EnemyTarget : MonoBehaviour
                
         if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
-            //currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
             currentWaypointIndex = Random.Range(0, waypoints.Length);
         }
     }

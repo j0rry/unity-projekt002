@@ -8,9 +8,9 @@ public class PlayerLook : MonoBehaviour
     public float cs2Sensitivity = 2.0f;
     public int dpi = 800;
 
-    private float xRotation = 0f;
-    private float unitySensitivity;
-    private Vector2 lookInput;
+    float xRotation = 0f;
+    float unitySensitivity;
+    Vector2 lookInput;
 
     void Awake()
     {

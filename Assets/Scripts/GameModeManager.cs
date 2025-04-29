@@ -5,16 +5,17 @@ public class GameModeManager : MonoBehaviour
 {
     public static GameModeManager Instance { get; set; }
 
-    [SerializeField] Transform[] gamemodes;
+    [SerializeField] Transform[] gamemodes; // alla gamemodes så man kan cycla
 
     public int kills;
-    public int numberOfCurrentSpawns = 5;
+    public int numberOfCurrentSpawns = 5; // nuvarande spawnade objekt
 
-    private int currentGamemodeIndex = 0;
+    private int currentGamemodeIndex = 0; // Vilket gamemode
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        // Används för att spara GameModeManager till andra scener
+        if (Instance != null && Instance != this) 
         {
             Destroy(gameObject);
             return;
@@ -26,7 +27,7 @@ public class GameModeManager : MonoBehaviour
 
     void Start()
     {
-        ActivateGamemode(currentGamemodeIndex);
+        ActivateGamemode(currentGamemodeIndex); // vid start så sätt gamemode till current gamemode index
     }
 
     void Update()
@@ -38,7 +39,7 @@ public class GameModeManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            CycleGamemode();
+            CycleGamemode(); // byt gamemode
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -49,18 +50,22 @@ public class GameModeManager : MonoBehaviour
 
     void CycleGamemode()
     {
+        // ta bort nuvarande spawnade targets / spawns
         numberOfCurrentSpawns = 0;
 
+        // Ta bort alla targets som finns i scenen med tag
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
         foreach (GameObject target in targets)
         {
             Destroy(target);
         }
 
+        // Stänger av den nuvarande gamemode script
         gamemodes[currentGamemodeIndex].gameObject.SetActive(false);
 
+        // ändra till nästa Gamemode
         currentGamemodeIndex = (currentGamemodeIndex + 1) % gamemodes.Length;
-        ActivateGamemode(currentGamemodeIndex);
+        ActivateGamemode(currentGamemodeIndex); // aktivera gamemode 
     }
 
     void ActivateGamemode(int index)
